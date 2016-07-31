@@ -4,9 +4,7 @@
 			"auth_service": "google", // "google" or "ptc"
 				"username": "username",
 				"password": "password",
-				"location": "",
-				"latitude": 52.383175,
-				"longitude": -1.5632707
+				"location": "52.383175, -1.5632707"
 		}
 	]
 }
