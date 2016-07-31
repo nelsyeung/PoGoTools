@@ -1,0 +1,12 @@
+root = true
+
+[*]
+indent_style = tab
+end_of_file = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = false
+
+[*.py]
+indent_style = space
+indent_size = 4
