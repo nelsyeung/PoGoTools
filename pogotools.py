@@ -53,7 +53,11 @@ def transfer_pokemon(items_pokemon, config, api):
 
     for p in items_pokemon:
         pokemon_name = p['name'].lower()
-        if pokemon_name not in config['allow'].lower():
+        allow_pokemon = config.get('allow', '').lower()
+        except_pokemon = config.get('except', '').lower()
+
+        if ((allow_pokemon != 'all' and pokemon_name not in allow_pokemon) or
+                pokemon_name in except_pokemon):
             continue
 
         # Parse user settings for this Pokemon
@@ -76,8 +80,8 @@ def transfer_pokemon(items_pokemon, config, api):
 
         print('Transfer: {:>12}   CP: {:4d}   IV: {:.2f}'.format(
             p['name'], p['cp'], p['iv']))
-        api.release_pokemon(pokemon_id=p['id'])
         time.sleep(0.5)  # Sleep to prevent too many requests
+        api.release_pokemon(pokemon_id=p['id'])
 
     logging.info('Transfer complete')
 
