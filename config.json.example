@@ -1,10 +1,17 @@
 {
 	"accounts": [
 		{
-			"auth_service": "google", // "google" or "ptc"
-				"username": "username",
-				"password": "password",
-				"location": "52.383175, -1.5632707"
+			"auth_service": "google",
+			"username": "username",
+			"password": "password",
+			"location": "52.383175, -1.5632707"
 		}
-	]
+	],
+
+	"transfer": {
+		"allow": ["pidgey", "weedle", "rattata"],
+		"all": { "under_cp": 400, "under_iv": 70, "cp_iv_logic": "and" },
+		"pidgey": { "under_cp": 200, "under_iv": 70, "cp_iv_logic": "and" },
+		"weedle": { "under_cp": 100, "under_iv": 70, "cp_iv_logic": "or" }
+	}
 }

@@ -7,6 +7,7 @@ i.e., it won't keep the user logged in.
 - List all Pokemon with their CP and IV.
 - Sort the listed Pokemon by their real name, CP or IV.
 - Filter the list of Pokemon to a certain CP and IV.
+- Transfer Pokemon based on your own criteria
 
 ## Installation
 You need to have `Python` and `pip` installed on your computer. Please refer to other online
@@ -51,7 +52,7 @@ python pogotools.py -p -s name
 python pogotools.py -p -s iv
 ```
 
-Applying a filter to your list of pokemon:
+Applying a filter to your list of Pokemon:
 ```sh
 # Show only Pokemon below or equal to CP 1000
 python pogotools.py -p --hide-cp-below 1000
@@ -69,10 +70,18 @@ These filters can be chained:
 python pogotools.py -p --hide-cp-below 1000 --hide-iv-below 70
 ```
 
+Transfer Pokemon:
+Make sure you have set the config file correctly for transfer to work.
+This can be dangerous so make sure your criteria is actually what you want or your favourite Pikachu
+may run away from you!
+```sh
+python pogotools.py --transfer
+```
+
 ## Todo
-- Transfer Pokemon
 - Evolve Pokemon
 - Add tests
+- Write proper documentation
 - I have no idea what other tools I'm going to add yet but definitely more to come.
 
 ## Contributions
