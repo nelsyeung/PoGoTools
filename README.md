@@ -31,9 +31,7 @@ with this, so that it won't cluster up your computer with Python packages.
 4. Configure your account. Copy the `config.json.example` file to `config.json` then add your
    login details to the `accounts` section. If you are worried about getting banned from the
    temporary *teleportation*, you may want to find out your current location and change the config
-   file accordingly. Currently, you will have to find out your latitude and longitude in order to
-   make this work (name based location is not supported yet). Check out Google Maps on how to get
-   that information.
+   file accordingly. You can use either `latitude, longitude` format or just supply a name.
 
 5. Use the tool! Type in the terminal: `python pogotools.py -h` for all the available options.
 
@@ -72,8 +70,8 @@ python pogotools.py -p --hide-cp-below 1000 --hide-iv-below 70
 ```
 
 ## Todo
-- Add name based location or get user's current location
 - Transfer Pokemon
+- Evolve Pokemon
 - Add tests
 - I have no idea what other tools I'm going to add yet but definitely more to come.
 
