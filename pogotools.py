@@ -51,6 +51,8 @@ def transfer_pokemon(items_pokemon, config, api):
     """Transfer all Pokemon satisfying the criteria within the config file."""
     logging.info('Transferring all the relevant Pokemon')
 
+    total_transfer = 0
+
     for p in items_pokemon:
         pokemon_name = p['name'].lower()
         allow_pokemon = config.get('allow', '').lower()
@@ -82,7 +84,9 @@ def transfer_pokemon(items_pokemon, config, api):
             p['name'], p['cp'], p['iv']))
         time.sleep(0.5)  # Sleep to prevent too many requests
         api.release_pokemon(pokemon_id=p['id'])
+        total_transfer += 1
 
+    print('Total transfer: ' + total_transfer)
     logging.info('Transfer complete')
 
 
@@ -187,7 +191,9 @@ def main():
         pprint.pprint(res)
 
     if args.get_pokemon:
-        for p in sorted(get_pokemon(res), key=lambda k: k[args.sort_by]):
+        items_pokemon = sorted(get_pokemon(res), key=lambda k: k[args.sort_by])
+
+        for p in items_pokemon:
             if (p['cp'] >= args.hide_cp_below and
                     p['cp'] <= args.show_cp_below and
                     p['iv'] >= args.hide_iv_below and
@@ -195,7 +201,8 @@ def main():
                 print('{:>12}   CP: {:4d}   IV: {:.2f}'.format(
                     p['name'], p['cp'], p['iv']))
 
-        logging.info('Finished listing all your Pokemon')
+        print('Total Pokemon: ' + len(items_pokemon))
+        logging.info('Finish listing all Pokemon')
 
     if args.transfer:
         transfer_pokemon(get_pokemon(res), config['transfer'], api)
