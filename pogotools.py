@@ -86,7 +86,7 @@ def transfer_pokemon(items_pokemon, config, api):
         api.release_pokemon(pokemon_id=p['id'])
         total_transfer += 1
 
-    print('Total transfer: ' + total_transfer)
+    print('Total transfer: ' + str(total_transfer))
     logging.info('Transfer complete')
 
 
@@ -201,7 +201,7 @@ def main():
                 print('{:>12}   CP: {:4d}   IV: {:.2f}'.format(
                     p['name'], p['cp'], p['iv']))
 
-        print('Total Pokemon: ' + len(items_pokemon))
+        print('Total Pokemon: ' + str(len(items_pokemon)))
         logging.info('Finish listing all Pokemon')
 
     if args.transfer:
