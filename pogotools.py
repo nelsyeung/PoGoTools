@@ -281,7 +281,7 @@ def main():
                     p['iv'] >= args.hide_iv_below and
                     p['iv'] <= args.show_iv_below):
                 print('{:>12}   CP: {:4d}   IV [A/D/S]: '
-                      '[{:02d}/{:02d}/{:02d}] {:.2f}'.format(
+                      '[{:02d}/{:02d}/{:02d}] {:.0f}'.format(
                         p['name'], p['cp'], p['attack'], p['defense'],
                         p['stamina'], p['iv']))
 
