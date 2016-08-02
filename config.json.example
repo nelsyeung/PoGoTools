@@ -1,33 +1,31 @@
-{
-	"accounts": [
-		{
-			"auth_service": "google",
-			"username": "username",
-			"password": "password",
-			"location": "52.383175, -1.5632707"
+{"accounts": [
+	{
+		"auth_service": "google",
+		"username": "username",
+		"password": "password",
+		"location": "52.383175, -1.5632707"
 
-			"transfer": {
-				"allow": "all",
-				"except": "dragonite",
-				"all": { "under_cp": 500, "under_iv": 70, "cp_iv_logic": "and" },
-				"pidgey": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" },
-				"weedle": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" }
-			}
-		},
-
-		{
-			"auth_service": "ptc",
-			"username": "another account",
-			"password": "",
-			"location": "University of Warwick"
-
-			"transfer": {
-				"allow": "all",
-				"except": "dragonite",
-				"all": { "under_cp": 500, "under_iv": 70, "cp_iv_logic": "and" },
-				"pidgey": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" },
-				"weedle": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" }
-			}
+		"transfer": {
+			"allow": "all",
+			"except": "dragonite",
+			"all": { "under_cp": 500, "under_iv": 70, "cp_iv_logic": "and" },
+			"pidgey": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" },
+			"weedle": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" }
 		}
-	]
-}
+	},
+
+	{
+		"auth_service": "ptc",
+		"username": "another account",
+		"password": "",
+		"location": "University of Warwick"
+
+		"transfer": {
+			"allow": "all",
+			"except": "dragonite",
+			"all": { "under_cp": 500, "under_iv": 70, "cp_iv_logic": "and" },
+			"pidgey": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" },
+			"weedle": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" }
+		}
+	}
+]}
