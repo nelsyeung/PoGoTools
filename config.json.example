@@ -11,6 +11,13 @@
 			"all": { "under_cp": 500, "under_iv": 70, "cp_iv_logic": "and" },
 			"pidgey": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" },
 			"weedle": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" }
+		},
+
+		"recycle": {
+			"razz berry": { "above_count": 20 },
+			"potion": { "above_count": 0 },
+			"super potion": { "above_count": 0 },
+			"revive": { "above_count": 30 }
 		}
 	},
 
@@ -26,6 +33,13 @@
 			"all": { "under_cp": 500, "under_iv": 70, "cp_iv_logic": "and" },
 			"pidgey": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" },
 			"weedle": { "under_cp": 0, "under_iv": 70, "cp_iv_logic": "or" }
+		},
+
+		"recycle": {
+			"razz berry": { "above_count": 20 },
+			"potion": { "above_count": 0 },
+			"super potion": { "above_count": 0 },
+			"revive": { "above_count": 30 }
 		}
 	}
 ]}

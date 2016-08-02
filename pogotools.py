@@ -11,14 +11,19 @@ import pgoapi
 
 
 def print_total(num_chars, field, total):
-    """Print total number of specified field."""
-    dashes = ''
+    """Print total number of specified field centred with the number of chars
+    above and add dashes if there actually has been some listing above."""
     print_str = '{:^' + str(num_chars) + '}'
 
-    for _ in range(num_chars):
-        dashes += '-'
+    # Only print dashes if there has been some listing above
+    if total > 0:
+        dashes = ''
 
-    print(print_str.format(dashes))
+        for _ in range(num_chars):
+            dashes += '-'
+
+        print(print_str.format(dashes))
+
     print(print_str.format(
         'Total ' + field + ': ' + str(total)))
 
@@ -94,11 +99,12 @@ def transfer_pokemon(inventory_pokemon, config, api):
 
         print('Transfer: {:>12}   CP: {:4d}   IV: {:.2f}'.format(
             p['name'], p['cp'], p['iv']))
+
         time.sleep(0.5)  # Sleep to prevent too many requests
         api.release_pokemon(pokemon_id=p['id'])
         total_transfer += 1
 
-    print('Total transfer: ' + str(total_transfer))
+    print_total(46, 'transfer', total_transfer)
     logging.info('Transfer complete')
 
 
@@ -120,15 +126,37 @@ def get_items(res):
 
         if 'item' in item and 'count' in item['item']:
             item_data = item['item']
-            item_id = str(item_data['item_id'])
 
             inventory_items.append({
                 'id': item_data['item_id'],
-                'name': items[item_id],
+                'name': items[str(item_data['item_id'])],
                 'count': item_data['count']
             })
 
     return inventory_items
+
+
+def recycle_items(inventory_items, config, api):
+    """Recycle all items satisfying the criteria within the config file."""
+    logging.info('Transferring all the relevant items')
+
+    total_recycle = 0
+
+    for item in inventory_items:
+        config_item = config.get(item['name'].lower())
+
+        if config_item and item['count'] > config_item['above_count']:
+            recycle_count = item['count'] - config_item['above_count']
+
+            print('Recycle: {:>24}  {:<3d}'.format(
+                item['name'], recycle_count))
+
+            time.sleep(0.5)  # Sleep to prevent too many requests
+            api.recycle_inventory_item(item_id=item['id'], count=recycle_count)
+            total_recycle += recycle_count
+
+    print_total(39, 'recycle', total_recycle)
+    logging.info('Transfer complete')
 
 
 def setup_parser():
@@ -179,6 +207,11 @@ def setup_parser():
     parser.add_argument(
         '-i', '--get-items', action='store_true',
         help='List all items excluding Pokemon and eggs.')
+
+    parser.add_argument(
+        '--recycle', action='store_true',
+        help='Transfer all items that satisfy the criteria set in your'
+             'config file')
 
     return parser
 
@@ -262,6 +295,9 @@ def main():
 
         print_total(30, 'items', total_items)
         logging.info('Finish listing all your items')
+
+    if args.recycle:
+        recycle_items(get_items(res), config['recycle'], api)
 
 if __name__ == '__main__':
     main()

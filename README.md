@@ -4,10 +4,12 @@ Some useful Pokemon Go CLI tools. This is going to be strictly a set of *single 
 i.e., it won't keep the user logged in.
 
 ## Features
-- List all Pokemon with their CP and IV.
-- Sort the listed Pokemon by their real name, CP or IV.
-- Filter the list of Pokemon to a certain CP and IV.
+- List all Pokemon with their CP and IV
+- Sort the listed Pokemon by their real name, CP or IV
+- Filter the list of Pokemon to a certain CP and IV
 - Transfer Pokemon based on your own criteria
+- List all your items
+- Recycle or trash items based on your own criteria
 
 ## Installation
 You need to have `Python` and `pip` installed on your computer. Please refer to other online
@@ -71,6 +73,7 @@ python pogotools.py -p --hide-cp-below 1000 --hide-iv-below 70
 ```
 
 Transfer Pokemon:
+
 Make sure you have set the config file correctly for transfer to work.
 This can be dangerous so make sure your criteria is actually what you want or your favourite Pikachu
 may run away from you!
@@ -83,6 +86,15 @@ Get a list of all your items:
 python pogotools.py -i
 # or
 python pogotools.py --get-items
+```
+
+Recycle items:
+
+Make sure you have set the config file correctly for transfer to work.
+This can be dangerous so make sure your criteria is actually what you want or your Masterball might
+be put in the trash!
+```sh
+python pogotools.py --recycle
 ```
 
 ## Todo
