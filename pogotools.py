@@ -10,6 +10,19 @@ import geopy
 import pgoapi
 
 
+def print_total(num_chars, field, total):
+    """Print total number of specified field."""
+    dashes = ''
+    print_str = '{:^' + str(num_chars) + '}'
+
+    for _ in range(num_chars):
+        dashes += '-'
+
+    print(print_str.format(dashes))
+    print(print_str.format(
+        'Total ' + field + ': ' + str(total)))
+
+
 def get_iv(pokemon):
     """Calculate Pokemon IV percentage."""
     return ((pokemon.get('individual_attack', 0) +
@@ -26,34 +39,33 @@ def get_pokemon(res):
     with open(pokemon_file, 'r') as f:
         pokemon = json.load(f)
 
-    items = res['responses']['GET_INVENTORY']['inventory_delta'][
+    inventory = res['responses']['GET_INVENTORY']['inventory_delta'][
         'inventory_items']
-    items_pokemon = []
+    inventory_pokemon = []
 
-    for item in items:
+    for item in inventory:
         item = item['inventory_item_data']
 
         if 'pokemon_data' in item and 'pokemon_id' in item['pokemon_data']:
             pokemon_data = item['pokemon_data']
-            pokemon_id = str(pokemon_data['pokemon_id'])
 
-            items_pokemon.append({
+            inventory_pokemon.append({
                 'id': pokemon_data['id'],
-                'name': pokemon[pokemon_id],
+                'name': pokemon[str(pokemon_data['pokemon_id'])],
                 'cp': int(pokemon_data['cp']),
                 'iv': get_iv(pokemon_data)
             })
 
-    return items_pokemon
+    return inventory_pokemon
 
 
-def transfer_pokemon(items_pokemon, config, api):
+def transfer_pokemon(inventory_pokemon, config, api):
     """Transfer all Pokemon satisfying the criteria within the config file."""
     logging.info('Transferring all the relevant Pokemon')
 
     total_transfer = 0
 
-    for p in items_pokemon:
+    for p in inventory_pokemon:
         pokemon_name = p['name'].lower()
         allow_pokemon = config.get('allow', '').lower()
         except_pokemon = config.get('except', '').lower()
@@ -88,6 +100,35 @@ def transfer_pokemon(items_pokemon, config, api):
 
     print('Total transfer: ' + str(total_transfer))
     logging.info('Transfer complete')
+
+
+def get_items(res):
+    """Return all items excluding Pokemon and eggs."""
+    logging.info('Getting a list of all your items')
+
+    # Read item names from file
+    items_file = os.path.join('data', 'items.json')
+    with open(items_file, 'r') as f:
+        items = json.load(f)
+
+    inventory = res['responses']['GET_INVENTORY']['inventory_delta'][
+        'inventory_items']
+    inventory_items = []
+
+    for item in inventory:
+        item = item['inventory_item_data']
+
+        if 'item' in item and 'count' in item['item']:
+            item_data = item['item']
+            item_id = str(item_data['item_id'])
+
+            inventory_items.append({
+                'id': item_data['item_id'],
+                'name': items[item_id],
+                'count': item_data['count']
+            })
+
+    return inventory_items
 
 
 def setup_parser():
@@ -134,6 +175,10 @@ def setup_parser():
         '--transfer', action='store_true',
         help='Transfer all Pokemon that satisfy the criteria set in your'
              'config file')
+
+    parser.add_argument(
+        '-i', '--get-items', action='store_true',
+        help='List all items excluding Pokemon and eggs.')
 
     return parser
 
@@ -191,9 +236,10 @@ def main():
         pprint.pprint(res)
 
     if args.get_pokemon:
-        items_pokemon = sorted(get_pokemon(res), key=lambda k: k[args.sort_by])
+        inventory_pokemon = sorted(get_pokemon(res),
+                                   key=lambda k: k[args.sort_by])
 
-        for p in items_pokemon:
+        for p in inventory_pokemon:
             if (p['cp'] >= args.hide_cp_below and
                     p['cp'] <= args.show_cp_below and
                     p['iv'] >= args.hide_iv_below and
@@ -201,11 +247,21 @@ def main():
                 print('{:>12}   CP: {:4d}   IV: {:.2f}'.format(
                     p['name'], p['cp'], p['iv']))
 
-        print('Total Pokemon: ' + str(len(items_pokemon)))
-        logging.info('Finish listing all Pokemon')
+        print_total(36, 'Pokemon', len(inventory_pokemon))
+        logging.info('Finish listing all your Pokemon')
 
     if args.transfer:
         transfer_pokemon(get_pokemon(res), config['transfer'], api)
+
+    if args.get_items:
+        total_items = 0
+
+        for item in get_items(res):
+            total_items += item['count']
+            print('{:>24}  {:<3d}'.format(item['name'], item['count']))
+
+        print_total(30, 'items', total_items)
+        logging.info('Finish listing all your items')
 
 if __name__ == '__main__':
     main()

@@ -78,6 +78,13 @@ may run away from you!
 python pogotools.py --transfer
 ```
 
+Get a list of all your items:
+```sh
+python pogotools.py -i
+# or
+python pogotools.py --get-items
+```
+
 ## Todo
 - Evolve Pokemon
 - Add tests
