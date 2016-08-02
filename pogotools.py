@@ -58,6 +58,9 @@ def get_pokemon(res):
                 'id': pokemon_data['id'],
                 'name': pokemon[str(pokemon_data['pokemon_id'])],
                 'cp': int(pokemon_data['cp']),
+                'attack': pokemon_data.get('individual_attack', 0),
+                'defense': pokemon_data.get('individual_defense', 0),
+                'stamina': pokemon_data.get('individual_stamina', 0),
                 'iv': get_iv(pokemon_data)
             })
 
@@ -277,10 +280,12 @@ def main():
                     p['cp'] <= args.show_cp_below and
                     p['iv'] >= args.hide_iv_below and
                     p['iv'] <= args.show_iv_below):
-                print('{:>12}   CP: {:4d}   IV: {:.2f}'.format(
-                    p['name'], p['cp'], p['iv']))
+                print('{:>12}   CP: {:4d}   IV [A/D/S]: '
+                      '[{:02d}/{:02d}/{:02d}] {:.2f}'.format(
+                        p['name'], p['cp'], p['attack'], p['defense'],
+                        p['stamina'], p['iv']))
 
-        print_total(36, 'Pokemon', len(inventory_pokemon))
+        print_total(55, 'Pokemon', len(inventory_pokemon))
         logging.info('Finish listing all your Pokemon')
 
     if args.transfer:
