@@ -85,18 +85,18 @@ def transfer_pokemon(inventory_pokemon, config, api):
         # Parse user settings for this Pokemon
         below_cp = config['all']['below_cp']
         below_iv = config['all']['below_iv']
-        cp_iv_logic = config['all']['cp_iv_logic']
+        logic = config['all']['logic']
 
         if config.get(pokemon_name):
             below_cp = config[pokemon_name]['below_cp']
             below_iv = config[pokemon_name]['below_iv']
-            cp_iv_logic = config[pokemon_name]['cp_iv_logic']
+            logic = config[pokemon_name]['logic']
 
         # Main transfer logic
-        if cp_iv_logic == 'and':
+        if logic == 'and':
             if p['cp'] >= below_cp or p['iv'] >= below_iv:
                 continue
-        elif cp_iv_logic == 'or':
+        elif logic == 'or':
             if p['cp'] >= below_cp and p['iv'] >= below_iv:
                 continue
 
@@ -162,6 +162,10 @@ def recycle_items(inventory_items, config, api):
     logging.info('Transfer complete')
 
 
+def evolve_pokemon(inventory_pokemon, config, api):
+    """Evolve all Pokemon satisfying the criteria within the config file."""
+
+
 def setup_parser():
     """Return argparse parser."""
     parser = argparse.ArgumentParser(
@@ -214,6 +218,11 @@ def setup_parser():
     parser.add_argument(
         '--recycle', action='store_true',
         help='Transfer all items that satisfy the criteria set in your'
+             'config file')
+
+    parser.add_argument(
+        '--evolve', action='store_true',
+        help='Evolve all Pokemon that satisfy the criteria set in your'
              'config file')
 
     return parser
