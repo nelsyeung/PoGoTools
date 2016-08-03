@@ -10,6 +10,7 @@ i.e., it won't keep the user logged in.
 - Transfer Pokemon based on your own criteria
 - List all your items
 - Recycle or trash items based on your own criteria
+- Evolve Pokemon based on your own criteria
 
 ## Installation
 You need to have `Python` and `pip` installed on your computer. Please refer to other online
@@ -97,8 +98,15 @@ be put in the trash!
 python pogotools.py --recycle
 ```
 
+Evolve Pokemon:
+```sh
+python pogotools.py --evolve
+```
+Currently this feature may work with `"allow": "all"`, so it's best for you to have multiple Pokemon
+set (i.e., `"allow": "pidgey, weedle, zubat, rattata"`) rather than using the `all` function.
+
 ## Todo
-- Evolve Pokemon
+- Make evolve work with "all" setting
 - Add tests
 - Write proper documentation
 - I have no idea what other tools I'm going to add yet but definitely more to come.
