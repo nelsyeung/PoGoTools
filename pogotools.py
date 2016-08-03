@@ -164,6 +164,46 @@ def recycle_items(inventory_items, config, api):
 
 def evolve_pokemon(inventory_pokemon, config, api):
     """Evolve all Pokemon satisfying the criteria within the config file."""
+    logging.info('Evolving all the relevant Pokemon')
+
+    total_evolve = 0
+
+    for p in inventory_pokemon:
+        pokemon_name = p['name'].lower()
+        allow_pokemon = config.get('allow', '').lower()
+        except_pokemon = config.get('except', '').lower()
+
+        if ((allow_pokemon != 'all' and pokemon_name not in allow_pokemon) or
+                pokemon_name in except_pokemon):
+            continue
+
+        # Parse user settings for this Pokemon
+        above_cp = config['all']['above_cp']
+        above_iv = config['all']['above_iv']
+        logic = config['all']['logic']
+
+        if config.get(pokemon_name):
+            above_cp = config[pokemon_name]['above_cp']
+            above_iv = config[pokemon_name]['above_iv']
+            logic = config[pokemon_name]['logic']
+
+        # Main evolve logic
+        if logic == 'and':
+            if p['cp'] < above_cp or p['iv'] < above_iv:
+                continue
+        elif logic == 'or':
+            if p['cp'] < above_cp and p['iv'] < above_iv:
+                continue
+
+        print('Evolve: {:>12}   CP: {:4d}   IV: {:.2f}'.format(
+            p['name'], p['cp'], p['iv']))
+
+        time.sleep(0.5)  # Sleep to prevent too many requests
+        api.evolve_pokemon(pokemon_id=p['id'])
+        total_evolve += 1
+
+    print_total(46, 'evolve', total_evolve)
+    logging.info('Evolve complete')
 
 
 def setup_parser():
@@ -312,6 +352,9 @@ def main():
 
     if args.recycle:
         recycle_items(get_items(res), config['recycle'], api)
+
+    if args.evolve:
+        evolve_pokemon(get_pokemon(res), config['evolve'], api)
 
 if __name__ == '__main__':
     main()

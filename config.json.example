@@ -18,6 +18,13 @@
 			"potion": { "above_count": 0 },
 			"super potion": { "above_count": 0 },
 			"revive": { "above_count": 30 }
+		},
+
+		"evolve": {
+			"allow": "pidgey",
+			"except": "",
+			"all": { "above_cp": 0, "above_iv": 80, "logic": "and" },
+			"pidgey": { "above_cp": 0, "above_iv": 0, "logic": "and" }
 		}
 	},
 
@@ -40,6 +47,13 @@
 			"potion": { "above_count": 0 },
 			"super potion": { "above_count": 0 },
 			"revive": { "above_count": 30 }
+		},
+
+		"evolve": {
+			"allow": "pidgey",
+			"except": "",
+			"all": { "above_cp": 0, "above_iv": 80, "logic": "and" },
+			"pidgey": { "above_cp": 0, "above_iv": 0, "logic": "and" }
 		}
 	}
 ]}
