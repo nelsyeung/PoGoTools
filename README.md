@@ -4,6 +4,7 @@ Some useful Pokemon Go CLI tools. This is going to be strictly a set of *single 
 i.e., it won't keep the user logged in.
 
 ## Features
+- Separate account settings for all the features
 - List all Pokemon with their CP and IV
 - Sort the listed Pokemon by their real name, CP or IV
 - Filter the list of Pokemon to a certain CP and IV
@@ -40,14 +41,14 @@ with this, so that it won't cluster up your computer with Python packages.
 5. Use the tool! Type in the terminal: `python pogotools.py -h` for all the available options.
 
 ## Usage
-Get a list of all your Pokemon sorted by their CP:
+**Get a list of all your Pokemon sorted by their CP:**
 ```sh
 python pogotools.py -p
 # or
 python pogotools.py --get-pokemon
 ```
 
-Get a list of all your Pokemon sorted by their real name or IV:
+**Get a list of all your Pokemon sorted by their real name or IV:**
 ```sh
 # For sort by real name:
 python pogotools.py -p -s name
@@ -55,7 +56,7 @@ python pogotools.py -p -s name
 python pogotools.py -p -s iv
 ```
 
-Applying a filter to your list of Pokemon:
+**Applying a filter to your list of Pokemon:**
 ```sh
 # Show only Pokemon below or equal to CP 1000
 python pogotools.py -p --hide-cp-below 1000
@@ -73,7 +74,7 @@ These filters can be chained:
 python pogotools.py -p --hide-cp-below 1000 --hide-iv-below 70
 ```
 
-Transfer Pokemon:
+**Transfer Pokemon:**
 
 Make sure you have set the config file correctly for transfer to work.
 This can be dangerous so make sure your criteria is actually what you want or your favourite Pikachu
@@ -82,14 +83,14 @@ may run away from you!
 python pogotools.py --transfer
 ```
 
-Get a list of all your items:
+**Get a list of all your items:**
 ```sh
 python pogotools.py -i
 # or
 python pogotools.py --get-items
 ```
 
-Recycle or trash items:
+**Recycle or trash items:**
 
 Make sure you have set the config file correctly for the recycle to work.
 This can be dangerous so make sure your criteria is actually what you want or your Masterball might
@@ -98,7 +99,7 @@ be put in the trash!
 python pogotools.py --recycle
 ```
 
-Evolve Pokemon:
+**Evolve Pokemon:**
 ```sh
 python pogotools.py --evolve
 ```
@@ -106,15 +107,15 @@ Currently this feature might not work with `"allow": "all"`, so it's best for yo
 Pokemon set (i.e., `"allow": "pidgey, weedle, zubat, rattata"`) rather than using the `all`
 function.
 
-## Todo
+## TODO
 - Make evolve work with "all" setting
 - Add tests
 - Write proper documentation
 - I have no idea what other tools I'm going to add yet but definitely more to come.
 
 ## Contributions
-Feel free to add any extra tools to this! But please make sure it won't keep the user logged in
-for a long time.
+Feel free to add any extra tools or bug fixes to this! But please make sure it won't keep the user
+logged in for a long time.
 
 ## Credits
 - Many thanks to [tejado](https://github.com/tejado) for the API, this won't work without it.
