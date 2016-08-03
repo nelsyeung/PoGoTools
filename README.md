@@ -7,10 +7,10 @@ i.e., it won't keep the user logged in.
 - List all Pokemon with their CP and IV
 - Sort the listed Pokemon by their real name, CP or IV
 - Filter the list of Pokemon to a certain CP and IV
-- Transfer Pokemon based on your own criteria
+- Transfer Pokemon base on your own criteria
 - List all your items
-- Recycle or trash items based on your own criteria
-- Evolve Pokemon based on your own criteria
+- Recycle or trash items base on your own criteria
+- Evolve Pokemon base on your own criteria
 
 ## Installation
 You need to have `Python` and `pip` installed on your computer. Please refer to other online
@@ -102,8 +102,9 @@ Evolve Pokemon:
 ```sh
 python pogotools.py --evolve
 ```
-Currently this feature may work with `"allow": "all"`, so it's best for you to have multiple Pokemon
-set (i.e., `"allow": "pidgey, weedle, zubat, rattata"`) rather than using the `all` function.
+Currently this feature might not work with `"allow": "all"`, so it's best for you to have multiple
+Pokemon set (i.e., `"allow": "pidgey, weedle, zubat, rattata"`) rather than using the `all`
+function.
 
 ## Todo
 - Make evolve work with "all" setting
