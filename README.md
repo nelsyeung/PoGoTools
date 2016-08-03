@@ -88,9 +88,9 @@ python pogotools.py -i
 python pogotools.py --get-items
 ```
 
-Recycle items:
+Recycle or trash items:
 
-Make sure you have set the config file correctly for transfer to work.
+Make sure you have set the config file correctly for the recycle to work.
 This can be dangerous so make sure your criteria is actually what you want or your Masterball might
 be put in the trash!
 ```sh
