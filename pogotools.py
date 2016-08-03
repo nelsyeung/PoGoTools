@@ -232,19 +232,19 @@ def setup_parser():
 
     parser.add_argument(
         '--hide-cp-below', metavar='CP', type=int, default=0,
-        help='Hide pokemon below a certain CP')
+        help='Hide Pokemon below a certain CP')
 
     parser.add_argument(
         '--show-cp-below', metavar='CP', type=int, default=9999,
-        help='Only show pokemon below a certain CP')
+        help='Only show Pokemon below a certain CP')
 
     parser.add_argument(
         '--hide-iv-below', metavar='IV', type=float, default=0.0,
-        help='Hide pokemon below a certain IV')
+        help='Hide Pokemon below a certain IV')
 
     parser.add_argument(
         '--show-iv-below', metavar='IV', type=float, default=100.0,
-        help='Only show pokemon below a certain IV')
+        help='Only show Pokemon below a certain IV')
 
     parser.add_argument(
         '--transfer', action='store_true',
