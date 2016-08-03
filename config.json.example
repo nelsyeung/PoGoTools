@@ -7,7 +7,7 @@
 
 		"transfer": {
 			"allow": "all",
-			"except": "dragonite",
+			"except": "dragonite, mewtwo, mew",
 			"all": { "below_cp": 500, "below_iv": 70, "logic": "and" },
 			"pidgey": { "below_cp": 0, "below_iv": 70, "logic": "or" },
 			"weedle": { "below_cp": 0, "below_iv": 70, "logic": "or" }
@@ -21,7 +21,7 @@
 		},
 
 		"evolve": {
-			"allow": "pidgey",
+			"allow": "pidgey, weedle",
 			"except": "",
 			"all": { "above_cp": 0, "above_iv": 80, "logic": "and" },
 			"pidgey": { "above_cp": 0, "above_iv": 0, "logic": "and" }
@@ -36,7 +36,7 @@
 
 		"transfer": {
 			"allow": "all",
-			"except": "dragonite",
+			"except": "dragonite, mewtwo, mew",
 			"all": { "below_cp": 500, "below_iv": 70, "logic": "and" },
 			"pidgey": { "below_cp": 0, "below_iv": 70, "logic": "or" },
 			"weedle": { "below_cp": 0, "below_iv": 70, "logic": "or" }
@@ -50,7 +50,7 @@
 		},
 
 		"evolve": {
-			"allow": "pidgey",
+			"allow": "pidgey, weedle",
 			"except": "",
 			"all": { "above_cp": 0, "above_iv": 80, "logic": "and" },
 			"pidgey": { "above_cp": 0, "above_iv": 0, "logic": "and" }
