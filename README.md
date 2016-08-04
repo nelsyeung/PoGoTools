@@ -42,17 +42,17 @@ with this, so that it won't cluster up your computer with Python packages.
 5. Use the tool! Type in the terminal: `python pogotools.py -h` for all the available options.
 
 ## Usage
-**Get a list of all your Pokemon sorted by their CP:**
+**Get a list of all your Pokemon sorted by their real name:**
 ```sh
 python pogotools.py -p
 # or
 python pogotools.py --get-pokemon
 ```
 
-**Get a list of all your Pokemon sorted by their real name or IV:**
+**Get a list of all your Pokemon sorted by their cp or IV:**
 ```sh
 # For sort by real name:
-python pogotools.py -p -s name
+python pogotools.py -p -s cp
 # For sort by IV:
 python pogotools.py -p -s iv
 ```
