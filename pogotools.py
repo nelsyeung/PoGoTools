@@ -215,7 +215,8 @@ def setup_parser():
     parser.add_argument(
         '-a', '--account', metavar='index', type=int, default=0,
         help='The account index you want to use from the config.json file.\n'
-        'For example "-a 0" corresponds to the first account. (default: "0")')
+             'For example "-a 0" corresponds to the first account. '
+             '(default: 0)')
 
     parser.add_argument(
         '--get-all', action='store_true',
@@ -226,9 +227,9 @@ def setup_parser():
         help='List all Pokemon with their CP and IV.')
 
     parser.add_argument(
-        '-s', '--sort-by', choices=['name', 'cp', 'iv'], default='cp',
+        '-s', '--sort-by', choices=['name', 'cp', 'iv'],
         help='Sort Pokemon by either their real name, CP or IV. '
-        '(default: "CP")')
+             '(default: name)')
 
     parser.add_argument(
         '--hide-cp-below', metavar='CP', type=int, default=0,
@@ -341,8 +342,18 @@ def main():
         pprint.pprint(res)
 
     if args.get_pokemon:
+        sort_by = 'name'
+
+        # Override default sort with config then argument
+        if not args.sort_by:
+            if (config.get('get_pokemon') and
+                    config['get_pokemon'].get('sort_by')):
+                sort_by = config['get_pokemon']['sort_by']
+        else:
+            sort_by = args.sort_by
+
         inventory_pokemon = sorted(get_pokemon(res),
-                                   key=lambda k: k[args.sort_by])
+                                   key=lambda k: k[sort_by])
 
         for p in inventory_pokemon:
             if (p['cp'] >= args.hide_cp_below and

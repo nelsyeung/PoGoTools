@@ -5,6 +5,10 @@
 		"password": "password",
 		"location": "52.383175, -1.5632707"
 
+		"get_pokemon": {
+			"sort_by": "cp"
+		},
+
 		"transfer": {
 			"allow": "all",
 			"except": "dragonite, mewtwo, mew",
@@ -33,6 +37,10 @@
 		"username": "another account",
 		"password": "",
 		"location": "University of Warwick"
+
+		"get_pokemon": {
+			"sort_by": "cp"
+		},
 
 		"transfer": {
 			"allow": "all",
