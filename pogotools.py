@@ -308,14 +308,34 @@ def main():
     api = pgoapi.PGoApi()
     logging.info('Setting the position to %f, %f', latitude, longitude)
     api.set_position(latitude, longitude, 0.0)
+
     logging.info('Logging into %s', config['username'])
-    api.login(config['auth_service'], config['username'], config['password'])
+    if not api.login(config['auth_service'],
+                     config['username'],
+                     config['password']):
+        logging.error('Login unsuccessful')
+        logging.error('Perhaps Niantic server is down')
+        sys.exit(1)
     logging.info('Logged into %s successfully', config['username'])
+
     logging.info('Getting user data')
-    req = api.create_request()
-    req.get_player()
-    req.get_inventory()
-    res = req.call()
+    for i in range(1, 11):
+        try:
+            req = api.create_request()
+            req.get_player()
+            req.get_inventory()
+            res = req.call()
+            break
+        except:
+            wait_time = 0.2
+            logging.error('Cannot get user data (trial: %d/10)', i)
+
+            if i == 10:
+                logging.error('Please wait a moment then try again')
+                sys.exit(1)
+
+            logging.error('Trying again in %.1fs', wait_time)
+            time.sleep(wait_time)
 
     if args.get_all:
         pprint.pprint(res)
