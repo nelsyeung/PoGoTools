@@ -232,6 +232,11 @@ def setup_parser():
              '(default: name)')
 
     parser.add_argument(
+        '--hide-pokemon', metavar='name', default='',
+        help='Hide specified Pokemon separated by comma\n'
+             'Example: --hide-pokemon pidgey,weedle,rattata')
+
+    parser.add_argument(
         '--hide-cp-below', metavar='CP', type=int, default=0,
         help='Hide Pokemon below a certain CP')
 
@@ -343,6 +348,7 @@ def main():
 
     if args.get_pokemon:
         sort_by = 'name'
+        listed_pokemon = 0
 
         # Override default sort with config then argument
         if not args.sort_by:
@@ -356,15 +362,20 @@ def main():
                                    key=lambda k: k[sort_by])
 
         for p in inventory_pokemon:
+            if p['name'].lower() in args.hide_pokemon:
+                continue
+
             if (p['cp'] >= args.hide_cp_below and
                     p['cp'] <= args.show_cp_below and
                     p['iv'] >= args.hide_iv_below and
                     p['iv'] <= args.show_iv_below):
+                listed_pokemon += 1
                 print('{:>12}   CP: {:4d}   IV [A/D/S]: '
                       '[{:02d}/{:02d}/{:02d}] {:.0f}'.format(
                         p['name'], p['cp'], p['attack'], p['defense'],
                         p['stamina'], p['iv']))
 
+        print_total(55, 'listed Pokemon', listed_pokemon)
         print_total(55, 'Pokemon', len(inventory_pokemon))
         logging.info('Finish listing all your Pokemon')
 

@@ -7,6 +7,7 @@ i.e., it won't keep the user logged in.
 - Separate account settings for all the features
 - List all Pokemon with their CP and IV
 - Sort the listed Pokemon by their real name, CP or IV
+- Filter the list of Pokemon by name
 - Filter the list of Pokemon to a certain CP and IV
 - Transfer Pokemon base on your own criteria
 - List all your items
@@ -58,6 +59,8 @@ python pogotools.py -p -s iv
 
 **Applying a filter to your list of Pokemon:**
 ```sh
+# Hide Pidgey, Weedle and Rattata from the list
+python pogotools.py -p --hide-pokemon pidgey,weedle,rattata
 # Show only Pokemon below or equal to CP 1000
 python pogotools.py -p --hide-cp-below 1000
 # Show only Pokemon above or equal to CP 1000
@@ -111,7 +114,7 @@ function.
 - Make evolve work with "all" setting
 - Add tests
 - Write proper documentation
-- I have no idea what other tools I'm going to add yet but definitely more to come.
+- Refactor
 
 ## Contributions
 Feel free to add any extra tools or bug fixes to this! But please make sure it won't keep the user
