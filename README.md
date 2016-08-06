@@ -51,7 +51,7 @@ python pogotools.py --get-pokemon
 
 **Get a list of all your Pokemon sorted by their cp or IV:**
 ```sh
-# For sort by real name:
+# For sort by CP:
 python pogotools.py -p -s cp
 # For sort by IV:
 python pogotools.py -p -s iv
