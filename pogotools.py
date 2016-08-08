@@ -8,6 +8,7 @@ import logging
 import time
 import geopy
 import pgoapi
+import datetime
 
 
 def print_total(num_chars, field, total):
@@ -61,7 +62,8 @@ def get_pokemon(res):
                 'attack': pokemon_data.get('individual_attack', 0),
                 'defense': pokemon_data.get('individual_defense', 0),
                 'stamina': pokemon_data.get('individual_stamina', 0),
-                'iv': get_iv(pokemon_data)
+                'iv': get_iv(pokemon_data),
+                'time': pokemon_data.get('creation_time_ms', 0)
             })
 
     return inventory_pokemon
@@ -227,7 +229,7 @@ def setup_parser():
         help='List all Pokemon with their CP and IV.')
 
     parser.add_argument(
-        '-s', '--sort-by', choices=['name', 'cp', 'iv'],
+        '-s', '--sort-by', choices=['name', 'cp', 'iv', 'time'],
         help='Sort Pokemon by either their real name, CP or IV. '
              '(default: name)')
 
@@ -371,9 +373,9 @@ def main():
                     p['iv'] <= args.show_iv_below):
                 listed_pokemon += 1
                 print('{:>12}   CP: {:4d}   IV [A/D/S]: '
-                      '[{:02d}/{:02d}/{:02d}] {:.0f}'.format(
+                      '[{:02d}/{:02d}/{:02d}] {:.0f}% Caputred {:%Y-%m-%d %H:%M:%S}'.format(
                         p['name'], p['cp'], p['attack'], p['defense'],
-                        p['stamina'], p['iv']))
+                        p['stamina'], p['iv'], datetime.datetime.fromtimestamp(p['time'] / 1000.0)))
 
         print_total(55, 'listed Pokemon', listed_pokemon)
         print_total(55, 'Pokemon', len(inventory_pokemon))
