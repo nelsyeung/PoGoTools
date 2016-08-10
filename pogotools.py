@@ -373,9 +373,11 @@ def main():
                     p['iv'] <= args.show_iv_below):
                 listed_pokemon += 1
                 print('{:>12}   CP: {:4d}   IV [A/D/S]: '
-                      '[{:02d}/{:02d}/{:02d}] {:.0f}%   Caputred: {:%Y-%m-%d %H:%M:%S}'.format(
+                      '[{:02d}/{:02d}/{:02d}] {:.0f}%   '
+                      'Captured: {:%Y-%m-%d %H:%M:%S}'.format(
                         p['name'], p['cp'], p['attack'], p['defense'],
-                        p['stamina'], p['iv'], datetime.datetime.fromtimestamp(p['time'] / 1000.0)))
+                        p['stamina'], p['iv'],
+                        datetime.datetime.fromtimestamp(p['time'] / 1000.0)))
 
         print_total(55, 'listed Pokemon', listed_pokemon)
         print_total(55, 'Pokemon', len(inventory_pokemon))
