@@ -239,6 +239,11 @@ def setup_parser():
              'Example: --hide-pokemon pidgey,weedle,rattata')
 
     parser.add_argument(
+        '--show-pokemon', metavar='name', default='',
+        help='Show only the specified Pokemon separated by comma\n'
+             'Example: --show-pokemon pidgey,weedle,rattata')
+
+    parser.add_argument(
         '--hide-cp-below', metavar='CP', type=int, default=0,
         help='Hide Pokemon below a certain CP')
 
@@ -365,6 +370,10 @@ def main():
 
         for p in inventory_pokemon:
             if p['name'].lower() in args.hide_pokemon:
+                continue
+
+            if (args.show_pokemon and
+                    p['name'].lower() not in args.show_pokemon):
                 continue
 
             if (p['cp'] >= args.hide_cp_below and

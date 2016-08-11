@@ -61,6 +61,8 @@ python pogotools.py -p -s iv
 ```sh
 # Hide Pidgey, Weedle and Rattata from the list
 python pogotools.py -p --hide-pokemon pidgey,weedle,rattata
+# Show only Pidgey, Weedle and Rattata from the list
+python pogotools.py -p --show-pokemon pidgey,weedle,rattata
 # Show only Pokemon below or equal to CP 1000
 python pogotools.py -p --hide-cp-below 1000
 # Show only Pokemon above or equal to CP 1000
