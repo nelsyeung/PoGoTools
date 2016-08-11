@@ -197,14 +197,19 @@ def evolve_pokemon(inventory_pokemon, config, api):
             if p['cp'] < above_cp and p['iv'] < above_iv:
                 continue
 
-        print('Evolve: {:>12}   CP: {:4d}   IV: {:.2f}'.format(
-            p['name'], p['cp'], p['iv']))
+        print('Evolve: {:>12}   CP: {:4d}   IV: {:2.0f}%'.format(
+            p['name'], p['cp'], p['iv'])),
 
         time.sleep(0.5)  # Sleep to prevent too many requests
-        api.evolve_pokemon(pokemon_id=p['id'])
-        total_evolve += 1
 
-    print_total(46, 'evolve', total_evolve)
+        if (api.evolve_pokemon(pokemon_id=p['id'])
+                ['responses']['EVOLVE_POKEMON'].get('experience_awarded')):
+            print('- Success')
+            total_evolve += 1
+        else:
+            print('- Failed')
+
+    print_total(51, 'evolve', total_evolve)
     logging.info('Evolve complete')
 
 
