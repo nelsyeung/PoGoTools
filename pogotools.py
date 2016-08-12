@@ -102,7 +102,7 @@ def transfer_pokemon(inventory_pokemon, config, api):
             if p['cp'] >= below_cp and p['iv'] >= below_iv:
                 continue
 
-        print('Transfer: {:>12}   CP: {:4d}   IV: {:.2f}'.format(
+        print('Transfer: {:>12}   CP: {:4d}   IV: {:2.0f}%'.format(
             p['name'], p['cp'], p['iv']))
 
         time.sleep(0.5)  # Sleep to prevent too many requests
