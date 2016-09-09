@@ -3,7 +3,7 @@
 		"auth_service": "google",
 		"username": "username",
 		"password": "password",
-		"location": "52.383175, -1.5632707"
+		"location": "52.383175, -1.5632707",
 
 		"get_pokemon": {
 			"sort_by": "cp"
@@ -36,7 +36,7 @@
 		"auth_service": "ptc",
 		"username": "another account",
 		"password": "",
-		"location": "University of Warwick"
+		"location": "University of Warwick",
 
 		"get_pokemon": {
 			"sort_by": "cp"
