@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import sys
 import os
 import argparse
@@ -198,7 +199,7 @@ def evolve_pokemon(inventory_pokemon, config, api):
                 continue
 
         print('Evolve: {:>12}   CP: {:4d}   IV: {:2.0f}%'.format(
-            p['name'], p['cp'], p['iv'])),
+            p['name'], p['cp'], p['iv']), end=" ")
 
         time.sleep(0.5)  # Sleep to prevent too many requests
 
