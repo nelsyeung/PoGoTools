@@ -106,7 +106,7 @@ def transfer_pokemon(inventory_pokemon, config, api):
         print('Transfer: {:>12}   CP: {:4d}   IV: {:2.0f}%'.format(
             p['name'], p['cp'], p['iv']))
 
-        time.sleep(0.5)  # Sleep to prevent too many requests
+        time.sleep(0.4)  # Sleep to prevent too many requests
         api.release_pokemon(pokemon_id=p['id'])
         total_transfer += 1
 
@@ -201,7 +201,7 @@ def evolve_pokemon(inventory_pokemon, config, api):
         print('Evolve: {:>12}   CP: {:4d}   IV: {:2.0f}%'.format(
             p['name'], p['cp'], p['iv']), end=" ")
 
-        time.sleep(0.5)  # Sleep to prevent too many requests
+        time.sleep(0.4)  # Sleep to prevent too many requests
 
         if (api.evolve_pokemon(pokemon_id=p['id'])
                 ['responses']['EVOLVE_POKEMON'].get('experience_awarded')):
