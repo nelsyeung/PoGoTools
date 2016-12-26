@@ -103,7 +103,7 @@ def transfer_pokemon(inventory_pokemon, config, api):
             if p['cp'] >= below_cp and p['iv'] >= below_iv:
                 continue
 
-        print('Transfer: {:>12}   CP: {:4d}   IV: {:2.0f}%'.format(
+        print('Transfer: {:>12}   CP: {:4d}   IV: {:3.0f}%'.format(
             p['name'], p['cp'], p['iv']))
 
         time.sleep(0.4)  # Sleep to prevent too many requests
@@ -198,7 +198,7 @@ def evolve_pokemon(inventory_pokemon, config, api):
             if p['cp'] < above_cp and p['iv'] < above_iv:
                 continue
 
-        print('Evolve: {:>12}   CP: {:4d}   IV: {:2.0f}%'.format(
+        print('Evolve: {:>12}   CP: {:4d}   IV: {:3.0f}%'.format(
             p['name'], p['cp'], p['iv']), end=" ")
 
         time.sleep(0.4)  # Sleep to prevent too many requests
@@ -387,7 +387,7 @@ def main():
                     p['iv'] <= args.show_iv_below):
                 listed_pokemon += 1
                 print('{:>12}   CP: {:4d}   IV [A/D/S]: '
-                      '[{:02d}/{:02d}/{:02d}] {:2.0f}%   '
+                      '[{:02d}/{:02d}/{:02d}] {:3.0f}%   '
                       'Captured: {:%Y-%m-%d %H:%M:%S}'.format(
                         p['name'], p['cp'], p['attack'], p['defense'],
                         p['stamina'], p['iv'],
