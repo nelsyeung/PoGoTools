@@ -310,19 +310,18 @@ def main():
 
     # Check if location is latitude and longitude, or a name
     location = config['location'].split(',')
-    if len(location) == 2:
-        try:
-            latitude = float(location[0])
-            longitude = float(location[1])
-            logging.info('Location supplied is already in latitude and'
-                         'longitude form')
-        except ValueError:
-            logging.info('Getting the longitude and latitude for %s',
-                         config['location'])
-            geolocator = geopy.geocoders.Nominatim()
-            location = geolocator.geocode(config['location'])
-            latitude = location.latitude
-            longitude = location.longitude
+    try:
+        latitude = float(location[0])
+        longitude = float(location[1])
+        logging.info('Location supplied is already in latitude and'
+                     'longitude form')
+    except ValueError:
+        logging.info('Getting the longitude and latitude for %s',
+                     config['location'])
+        geolocator = geopy.geocoders.Nominatim()
+        location = geolocator.geocode(config['location'])
+        latitude = location.latitude
+        longitude = location.longitude
 
     api = pgoapi.PGoApi()
     logging.info('Setting the position to %f, %f', latitude, longitude)
